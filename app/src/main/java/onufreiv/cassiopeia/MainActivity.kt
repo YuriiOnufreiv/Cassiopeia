@@ -1,5 +1,6 @@
 package onufreiv.cassiopeia
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -70,11 +71,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_manage -> {
 
             }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+            R.id.nav_poc -> {
+                startActivity(Intent(this, PocMainActivity::class.java))
             }
         }
 
