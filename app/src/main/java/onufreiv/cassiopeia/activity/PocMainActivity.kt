@@ -1,4 +1,4 @@
-package onufreiv.cassiopeia
+package onufreiv.cassiopeia.activity
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import onufreiv.cassiopeia.BluetoothDeviceAdapter
+import onufreiv.cassiopeia.BluetoothHandler
+import onufreiv.cassiopeia.R
 
 class PocMainActivity : AppCompatActivity() {
 

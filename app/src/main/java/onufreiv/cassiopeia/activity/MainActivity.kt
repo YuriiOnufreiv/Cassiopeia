@@ -1,4 +1,4 @@
-package onufreiv.cassiopeia
+package onufreiv.cassiopeia.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import onufreiv.cassiopeia.R
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
