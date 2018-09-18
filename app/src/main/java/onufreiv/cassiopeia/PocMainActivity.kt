@@ -8,13 +8,13 @@ import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 
-class MainActivity : AppCompatActivity() {
+class PocMainActivity : AppCompatActivity() {
 
     private val bluetoothHandler = BluetoothHandler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_poc_main)
         setButtonsOnClickListeners()
 
         turnOnBluetooth()
