@@ -13,8 +13,6 @@ import onufreiv.cassiopeia.R
 
 class PocMainActivity : AppCompatActivity() {
 
-    private val bluetoothHandler = BluetoothHandler()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_poc_main)
@@ -25,25 +23,25 @@ class PocMainActivity : AppCompatActivity() {
     }
 
     private fun setButtonsOnClickListeners() {
-        findViewById<View>(R.id.one).setOnClickListener { bluetoothHandler.sendData("1") }
-        findViewById<View>(R.id.two).setOnClickListener { bluetoothHandler.sendData("2") }
-        findViewById<View>(R.id.three).setOnClickListener { bluetoothHandler.sendData("3") }
-        findViewById<View>(R.id.four).setOnClickListener { bluetoothHandler.sendData("4") }
-        findViewById<View>(R.id.five).setOnClickListener { bluetoothHandler.sendData("5") }
-        findViewById<View>(R.id.six).setOnClickListener { bluetoothHandler.sendData("6") }
-        findViewById<View>(R.id.seven).setOnClickListener { bluetoothHandler.sendData("7") }
-        findViewById<View>(R.id.eight).setOnClickListener { bluetoothHandler.sendData("8") }
-        findViewById<View>(R.id.nine).setOnClickListener { bluetoothHandler.sendData("9") }
-        findViewById<View>(R.id.zero).setOnClickListener { bluetoothHandler.sendData("0") }
-        findViewById<View>(R.id.star).setOnClickListener { bluetoothHandler.sendData("*") }
-        findViewById<View>(R.id.bar).setOnClickListener { bluetoothHandler.sendData("#") }
-        findViewById<View>(R.id.up).setOnClickListener { bluetoothHandler.sendData("u") }
-        findViewById<View>(R.id.down).setOnClickListener { bluetoothHandler.sendData("d") }
-        findViewById<View>(R.id.left).setOnClickListener { bluetoothHandler.sendData("l") }
-        findViewById<View>(R.id.right).setOnClickListener { bluetoothHandler.sendData("r") }
-        findViewById<View>(R.id.ok).setOnClickListener { bluetoothHandler.sendData("o") }
-        findViewById<View>(R.id.connect).setOnClickListener { bluetoothHandler.startConnection() }
-        findViewById<View>(R.id.disconnect).setOnClickListener { bluetoothHandler.closeConnection() }
+        findViewById<View>(R.id.one).setOnClickListener { BluetoothHandler.sendData("1") }
+        findViewById<View>(R.id.two).setOnClickListener { BluetoothHandler.sendData("2") }
+        findViewById<View>(R.id.three).setOnClickListener { BluetoothHandler.sendData("3") }
+        findViewById<View>(R.id.four).setOnClickListener { BluetoothHandler.sendData("4") }
+        findViewById<View>(R.id.five).setOnClickListener { BluetoothHandler.sendData("5") }
+        findViewById<View>(R.id.six).setOnClickListener { BluetoothHandler.sendData("6") }
+        findViewById<View>(R.id.seven).setOnClickListener { BluetoothHandler.sendData("7") }
+        findViewById<View>(R.id.eight).setOnClickListener { BluetoothHandler.sendData("8") }
+        findViewById<View>(R.id.nine).setOnClickListener { BluetoothHandler.sendData("9") }
+        findViewById<View>(R.id.zero).setOnClickListener { BluetoothHandler.sendData("0") }
+        findViewById<View>(R.id.star).setOnClickListener { BluetoothHandler.sendData("*") }
+        findViewById<View>(R.id.bar).setOnClickListener { BluetoothHandler.sendData("#") }
+        findViewById<View>(R.id.up).setOnClickListener { BluetoothHandler.sendData("u") }
+        findViewById<View>(R.id.down).setOnClickListener { BluetoothHandler.sendData("d") }
+        findViewById<View>(R.id.left).setOnClickListener { BluetoothHandler.sendData("l") }
+        findViewById<View>(R.id.right).setOnClickListener { BluetoothHandler.sendData("r") }
+        findViewById<View>(R.id.ok).setOnClickListener { BluetoothHandler.sendData("o") }
+        findViewById<View>(R.id.connect).setOnClickListener { BluetoothHandler.startConnection() }
+        findViewById<View>(R.id.disconnect).setOnClickListener { BluetoothHandler.closeConnection() }
     }
 
     private fun turnOnBluetooth() {
@@ -53,8 +51,8 @@ class PocMainActivity : AppCompatActivity() {
 
     private fun selectDevice() {
         AlertDialog.Builder(this)
-                .setAdapter(BluetoothDeviceAdapter(bluetoothHandler.getPairedDevicesList(), this)) { dialog, i ->
-                    bluetoothHandler.bluetoothDevice =
+                .setAdapter(BluetoothDeviceAdapter(BluetoothHandler.getPairedDevicesList(), this)) { dialog, i ->
+                    BluetoothHandler.bluetoothDevice =
                             (dialog as AlertDialog).listView.adapter.getItem(i) as BluetoothDevice?
                 }
                 .setTitle(getString(R.string.select_bluetooth_device))

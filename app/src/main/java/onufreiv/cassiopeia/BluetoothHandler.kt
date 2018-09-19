@@ -6,7 +6,7 @@ import android.bluetooth.BluetoothSocket
 import java.io.OutputStream
 import java.util.*
 
-class BluetoothHandler {
+object BluetoothHandler {
 
     private val uuid = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
     private val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
