@@ -40,7 +40,7 @@ class PocMainActivity : AppCompatActivity() {
         findViewById<View>(R.id.left).setOnClickListener { BluetoothHandler.sendData("l") }
         findViewById<View>(R.id.right).setOnClickListener { BluetoothHandler.sendData("r") }
         findViewById<View>(R.id.ok).setOnClickListener { BluetoothHandler.sendData("o") }
-        findViewById<View>(R.id.connect).setOnClickListener { BluetoothHandler.startConnection() }
+//        findViewById<View>(R.id.connect).setOnClickListener { BluetoothHandler.startConnection() }
         findViewById<View>(R.id.disconnect).setOnClickListener { BluetoothHandler.closeConnection() }
     }
 
@@ -52,8 +52,8 @@ class PocMainActivity : AppCompatActivity() {
     private fun selectDevice() {
         AlertDialog.Builder(this)
                 .setAdapter(BluetoothDeviceAdapter(BluetoothHandler.getPairedDevicesList(), this)) { dialog, i ->
-                    BluetoothHandler.bluetoothDevice =
-                            (dialog as AlertDialog).listView.adapter.getItem(i) as BluetoothDevice?
+                    val bluetoothDevice = (dialog as AlertDialog).listView.adapter.getItem(i) as BluetoothDevice
+                    BluetoothHandler.startConnection(bluetoothDevice)
                 }
                 .setTitle(getString(R.string.select_bluetooth_device))
                 .create()

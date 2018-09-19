@@ -14,7 +14,7 @@ object BluetoothHandler {
     private lateinit var bluetoothSocket: BluetoothSocket
     private lateinit var outputStream: OutputStream
 
-    var bluetoothDevice: BluetoothDevice? = null
+    private lateinit var bluetoothDevice: BluetoothDevice
 
     fun getPairedDevicesList(): List<BluetoothDevice> = bluetoothAdapter.bondedDevices.toList()
 
@@ -23,8 +23,10 @@ object BluetoothHandler {
         outputStream.write(data)
     }
 
-    fun startConnection() {
-        bluetoothSocket = bluetoothDevice!!.createRfcommSocketToServiceRecord(uuid)
+    fun startConnection(deviceToConnect: BluetoothDevice) {
+        bluetoothDevice = deviceToConnect
+
+        bluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(uuid)
         bluetoothAdapter.cancelDiscovery()
         bluetoothSocket.connect()
         outputStream = bluetoothSocket.outputStream

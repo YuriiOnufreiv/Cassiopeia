@@ -1,16 +1,22 @@
 package onufreiv.cassiopeia.activity
 
+import android.app.Activity
+import android.bluetooth.BluetoothAdapter
+import android.bluetooth.BluetoothDevice
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import onufreiv.cassiopeia.BluetoothDeviceAdapter
+import onufreiv.cassiopeia.BluetoothHandler
 import onufreiv.cassiopeia.R
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +37,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        enableBluetooth()
     }
 
     override fun onBackPressed() {
@@ -74,5 +82,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 0)
+            when(resultCode) {
+                Activity.RESULT_OK -> selectDevice()
+            }
+    }
+
+    private fun enableBluetooth() {
+        val turnOn = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+        startActivityForResult(turnOn, 0)
+    }
+
+    private fun selectDevice() {
+        AlertDialog.Builder(this)
+                .setAdapter(BluetoothDeviceAdapter(BluetoothHandler.getPairedDevicesList(), this)) { dialog, i ->
+                    val bluetoothDevice = (dialog as AlertDialog).listView.adapter.getItem(i) as BluetoothDevice
+                    BluetoothHandler.startConnection(bluetoothDevice)
+                }
+                .setTitle(getString(R.string.select_bluetooth_device))
+                .create()
+                .show()
     }
 }
