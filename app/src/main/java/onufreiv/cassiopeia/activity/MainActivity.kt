@@ -5,48 +5,39 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import onufreiv.cassiopeia.BluetoothDeviceAdapter
-import onufreiv.cassiopeia.BluetoothHandler
-import onufreiv.cassiopeia.R
+import kotlinx.android.synthetic.main.content_main.*
+import onufreiv.cassiopeia.*
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+        fab.setOnClickListener {
+            startActivity(Intent(this, PocMainActivity::class.java))
         }
-
-        val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        nav_view.setNavigationItemSelectedListener(this)
 
         enableBluetooth()
-    }
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
+        val modes = listOf(
+                ModeData("vu", R.drawable.ic_menu_camera),
+                ModeData("rainbow", R.drawable.ic_menu_camera),
+                ModeData("strips", R.drawable.ic_menu_camera),
+                ModeData("stand by", R.drawable.ic_menu_camera),
+                ModeData("dots", R.drawable.ic_menu_camera),
+                ModeData("rain", R.drawable.ic_menu_camera)
+        )
+
+        recyclerview.layoutManager = GridLayoutManager(this, 3)
+        recyclerview.adapter = ModeAdapter(this, modes)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -61,34 +52,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_camera -> {
-
-            }
-            R.id.nav_gallery -> {
-
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_poc -> {
-                startActivity(Intent(this, PocMainActivity::class.java))
-            }
-        }
-
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == 0)
-            when(resultCode) {
+            when (resultCode) {
                 Activity.RESULT_OK -> selectDevice()
             }
     }
