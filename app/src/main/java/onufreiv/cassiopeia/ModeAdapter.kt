@@ -1,6 +1,7 @@
 package onufreiv.cassiopeia
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -21,10 +22,17 @@ class ModeAdapter(private val context: Context,
 	}
 
 	override fun onBindViewHolder(holder: ModeViewHolder, position: Int) {
-		holder.modeName.text = items[position].name
+		val modeData = items[position]
+
+		holder.modeNameTextView.text = modeData.name
+		holder.cardView.setOnClickListener {
+			BluetoothHandler.sendData(modeData.command)
+			context.startActivity(Intent(context, modeData.activity))
+		}
 	}
 }
 
-class ModeViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-	val modeName = view.mode_name_text_view!!
+class ModeViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+	val modeNameTextView = view.mode_name_text_view!!
+	val cardView = view.mode_card_view!!
 }

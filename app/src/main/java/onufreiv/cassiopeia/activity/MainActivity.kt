@@ -28,12 +28,9 @@ class MainActivity : AppCompatActivity() {
 		enableBluetooth()
 
 		val modes = listOf(
-				ModeData("vu", R.drawable.ic_menu_camera),
-				ModeData("rainbow", R.drawable.ic_menu_camera),
-				ModeData("strips", R.drawable.ic_menu_camera),
-				ModeData("stand by", R.drawable.ic_menu_camera),
-				ModeData("dots", R.drawable.ic_menu_camera),
-				ModeData("rain", R.drawable.ic_menu_camera)
+				ModeData("VU Meter", "1", R.drawable.ic_menu_camera, VuMeterActivity::class.java),
+				ModeData("Rainbow", "2", R.drawable.ic_menu_camera, RainbowActivity::class.java),
+				ModeData("Strips", "3", R.drawable.ic_menu_camera, StripsActivity::class.java)
 		)
 
 		recyclerview.layoutManager = GridLayoutManager(this, 3)
