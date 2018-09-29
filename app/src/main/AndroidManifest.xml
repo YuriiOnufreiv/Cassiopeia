@@ -24,6 +24,7 @@
 		</activity>
 		<activity android:name=".activity.VuMeterActivity" />
 		<activity android:name=".activity.RainbowActivity" />
+		<activity android:name=".StripsActivity"></activity>
 	</application>
 
 </manifest>
