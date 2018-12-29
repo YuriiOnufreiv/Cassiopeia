@@ -16,6 +16,8 @@ import onufreiv.cassiopeia.*
 
 class MainActivity : AppCompatActivity() {
 
+	val POWER_COMMAND = "*"
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
@@ -49,6 +51,10 @@ class MainActivity : AppCompatActivity() {
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		return when (item.itemId) {
 			R.id.action_settings -> true
+			R.id.action_power-> {
+				BluetoothHandler.sendData(POWER_COMMAND)
+				true
+			}
 			else -> super.onOptionsItemSelected(item)
 		}
 	}
