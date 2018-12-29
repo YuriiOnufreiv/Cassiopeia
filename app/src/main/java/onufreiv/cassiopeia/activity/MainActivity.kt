@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
 		val modes = listOf(
 				ModeData("VU Meter", "1", R.drawable.ic_menu_camera, VuMeterActivity::class.java),
 				ModeData("Rainbow", "2", R.drawable.ic_menu_camera, RainbowActivity::class.java),
-				ModeData("Strips", "3", R.drawable.ic_menu_camera, StripsActivity::class.java)
+				ModeData("Strips", "3", R.drawable.ic_menu_camera, StripsActivity::class.java),
+				ModeData("Frequencies", "8", R.drawable.ic_menu_camera, RunningFrequenciesActivity::class.java)
 		)
 
 		recyclerview.layoutManager = GridLayoutManager(this, 3)
