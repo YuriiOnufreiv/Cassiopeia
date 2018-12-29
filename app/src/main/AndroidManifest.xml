@@ -28,6 +28,7 @@
 		<activity android:name=".activity.RunningFrequenciesActivity"></activity>
 		<activity android:name=".activity.SpectrumAnalyzerActivity"></activity>
 		<activity android:name=".activity.BacklightActivity"></activity>
+		<activity android:name=".activity.StroboscopeActivity"></activity>
 	</application>
 
 </manifest>
