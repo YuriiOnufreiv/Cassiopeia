@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 				ModeData("VU Meter", "1", R.drawable.ic_menu_camera, VuMeterActivity::class.java),
 				ModeData("Rainbow", "2", R.drawable.ic_menu_camera, RainbowActivity::class.java),
 				ModeData("Strips", "3", R.drawable.ic_menu_camera, StripsActivity::class.java),
+				ModeData("Backlight", "7", R.drawable.ic_menu_camera, BacklightActivity::class.java),
 				ModeData("Frequencies", "8", R.drawable.ic_menu_camera, RunningFrequenciesActivity::class.java),
 				ModeData("Spectrum Analyzer", "9", R.drawable.ic_menu_camera, SpectrumAnalyzerActivity::class.java)
 		)
