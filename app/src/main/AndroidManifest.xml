@@ -26,6 +26,7 @@
 		<activity android:name=".activity.RainbowActivity" />
 		<activity android:name=".activity.StripsActivity"></activity>
 		<activity android:name=".activity.RunningFrequenciesActivity"></activity>
+		<activity android:name=".activity.SpectrumAnalyzerActivity"></activity>
 	</application>
 
 </manifest>
