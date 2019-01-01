@@ -24,10 +24,10 @@ class ModeAdapter(private val context: Context,
 	override fun onBindViewHolder(holder: ModeViewHolder, position: Int) {
 		val modeData = items[position]
 
-		holder.modeNameTextView.text = modeData.name
-		holder.modeIconImageView.setImageResource(modeData.icon)
+		holder.modeNameTextView.text = modeData.mode.id
+		holder.modeIconImageView.setImageResource(modeData.mode.icon)
 		holder.cardView.setOnClickListener {
-			BluetoothHandler.sendData(modeData.command)
+			BluetoothHandler.sendData(modeData.mode.command.value)
 			context.startActivity(Intent(context, modeData.activity))
 		}
 	}

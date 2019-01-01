@@ -16,8 +16,6 @@ import onufreiv.cassiopeia.*
 
 class MainActivity : AppCompatActivity() {
 
-	val POWER_COMMAND = "*"
-
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
@@ -30,13 +28,13 @@ class MainActivity : AppCompatActivity() {
 		enableBluetooth()
 
 		val modes = listOf(
-				ModeData("VU Meter", "1", R.drawable.ic_volume, VuMeterActivity::class.java),
-				ModeData("Rainbow", "2", R.drawable.ic_rainbow, RainbowActivity::class.java),
-				ModeData("Strips", "3", R.drawable.ic_semaphore, StripsActivity::class.java),
-				ModeData("Stroboscope", "6", R.drawable.ic_light_bulb, StroboscopeActivity::class.java),
-				ModeData("Backlight", "7", R.drawable.ic_lamp, BacklightActivity::class.java),
-				ModeData("Frequencies", "8", R.drawable.ic_studio_light, RunningFrequenciesActivity::class.java),
-				ModeData("Spectrum", "9", R.drawable.ic_light_bulbs, SpectrumAnalyzerActivity::class.java)
+				ModeData(Mode.VU_METER, VuMeterActivity::class.java),
+				ModeData(Mode.RAINBOW, RainbowActivity::class.java),
+				ModeData(Mode.STRIPS, StripsActivity::class.java),
+				ModeData(Mode.STROBOSCOPE, StroboscopeActivity::class.java),
+				ModeData(Mode.BACKLIGHT, BacklightActivity::class.java),
+				ModeData(Mode.FREQUENCIES, RunningFrequenciesActivity::class.java),
+				ModeData(Mode.SPECTRUM, SpectrumAnalyzerActivity::class.java)
 		)
 
 		recyclerview.layoutManager = GridLayoutManager(this, 3)
@@ -51,8 +49,8 @@ class MainActivity : AppCompatActivity() {
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		return when (item.itemId) {
 			R.id.action_settings -> true
-			R.id.action_power-> {
-				BluetoothHandler.sendData(POWER_COMMAND)
+			R.id.action_power -> {
+				BluetoothHandler.sendData(Command.STAR.value)
 				true
 			}
 			else -> super.onOptionsItemSelected(item)
