@@ -30,7 +30,7 @@ class ModeAdapter(private val context: Context,
 		holder.modeNameTextView.text = modeData.mode.id
 		holder.modeIconImageView.setImageResource(modeData.mode.icon)
 		holder.cardView.setOnClickListener {
-			BluetoothHandler.sendData(modeData.mode.command.value)
+			BluetoothHandler.sendCommand(modeData.mode.command)
 			context.startActivity(Intent(context, modeData.activity))
 		}
 	}

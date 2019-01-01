@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.R
+import onufreiv.cassiopeia.arduino.Command
 
 class StroboscopeActivity : AppCompatActivity() {
 
@@ -13,15 +14,15 @@ class StroboscopeActivity : AppCompatActivity() {
 		setContentView(R.layout.activity_stroboscope)
 
 		findViewById<View>(R.id.smoothness_icr_button)
-				.setOnClickListener { BluetoothHandler.sendData("r") }
+				.setOnClickListener { BluetoothHandler.sendCommand(Command.RIGHT) }
 
 		findViewById<View>(R.id.smoothness_dcr_button)
-				.setOnClickListener { BluetoothHandler.sendData("l") }
+				.setOnClickListener { BluetoothHandler.sendCommand(Command.LEFT) }
 
 		findViewById<View>(R.id.frequency_icr_button)
-				.setOnClickListener { BluetoothHandler.sendData("u") }
+				.setOnClickListener { BluetoothHandler.sendCommand(Command.UP) }
 
 		findViewById<View>(R.id.frequency_dcr_button)
-				.setOnClickListener { BluetoothHandler.sendData("d") }
+				.setOnClickListener { BluetoothHandler.sendCommand(Command.DOWN) }
 	}
 }

@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 		return when (item.itemId) {
 			R.id.action_settings -> true
 			R.id.action_power -> {
-				BluetoothHandler.sendData(Command.STAR.value)
+				BluetoothHandler.sendCommand(Command.STAR)
 				true
 			}
 			else -> super.onOptionsItemSelected(item)

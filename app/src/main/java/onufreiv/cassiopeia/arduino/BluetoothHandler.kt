@@ -23,6 +23,10 @@ object BluetoothHandler {
 		outputStream.write(data)
 	}
 
+	fun sendCommand(command: Command) {
+		sendData(command.value)
+	}
+
 	fun startConnection(deviceToConnect: BluetoothDevice) {
 		bluetoothDevice = deviceToConnect
 
