@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import onufreiv.cassiopeia.BluetoothHandler
+import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.R
 
 class StripsActivity : AppCompatActivity() {

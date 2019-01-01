@@ -1,4 +1,4 @@
-package onufreiv.cassiopeia
+package onufreiv.cassiopeia.mode
 
 import android.support.v7.app.AppCompatActivity
 

@@ -1,4 +1,4 @@
-package onufreiv.cassiopeia
+package onufreiv.cassiopeia.adapter
 
 import android.bluetooth.BluetoothDevice
 import android.content.Context

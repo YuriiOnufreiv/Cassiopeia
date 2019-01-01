@@ -3,7 +3,7 @@ package onufreiv.cassiopeia.activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import onufreiv.cassiopeia.BluetoothHandler
+import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.R
 
 class VuMeterActivity : AppCompatActivity() {

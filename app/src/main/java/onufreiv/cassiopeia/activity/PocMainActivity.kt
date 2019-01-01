@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import onufreiv.cassiopeia.BluetoothDeviceAdapter
-import onufreiv.cassiopeia.BluetoothHandler
+import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
+import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.R
 
 class PocMainActivity : AppCompatActivity() {

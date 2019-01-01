@@ -1,4 +1,4 @@
-package onufreiv.cassiopeia
+package onufreiv.cassiopeia.arduino
 
 enum class Command(val value: String) {
 	ONE("1"),

@@ -13,6 +13,12 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import onufreiv.cassiopeia.*
+import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
+import onufreiv.cassiopeia.adapter.ModeAdapter
+import onufreiv.cassiopeia.arduino.BluetoothHandler
+import onufreiv.cassiopeia.arduino.Command
+import onufreiv.cassiopeia.mode.Mode
+import onufreiv.cassiopeia.mode.ModeData
 
 class MainActivity : AppCompatActivity() {
 
