@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 				ModeData("Stroboscope", "6", R.drawable.ic_light_bulb, StroboscopeActivity::class.java),
 				ModeData("Backlight", "7", R.drawable.ic_lamp, BacklightActivity::class.java),
 				ModeData("Frequencies", "8", R.drawable.ic_studio_light, RunningFrequenciesActivity::class.java),
-				ModeData("Spectrum Analyzer", "9", R.drawable.ic_light_bulbs, SpectrumAnalyzerActivity::class.java)
+				ModeData("Spectrum", "9", R.drawable.ic_light_bulbs, SpectrumAnalyzerActivity::class.java)
 		)
 
 		recyclerview.layoutManager = GridLayoutManager(this, 3)
