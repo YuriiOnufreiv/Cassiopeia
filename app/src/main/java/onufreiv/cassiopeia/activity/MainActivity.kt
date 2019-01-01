@@ -30,13 +30,13 @@ class MainActivity : AppCompatActivity() {
 		enableBluetooth()
 
 		val modes = listOf(
-				ModeData("VU Meter", "1", R.drawable.ic_menu_camera, VuMeterActivity::class.java),
-				ModeData("Rainbow", "2", R.drawable.ic_menu_camera, RainbowActivity::class.java),
-				ModeData("Strips", "3", R.drawable.ic_menu_camera, StripsActivity::class.java),
-				ModeData("Stroboscope", "6", R.drawable.ic_menu_camera, StroboscopeActivity::class.java),
-				ModeData("Backlight", "7", R.drawable.ic_menu_camera, BacklightActivity::class.java),
-				ModeData("Frequencies", "8", R.drawable.ic_menu_camera, RunningFrequenciesActivity::class.java),
-				ModeData("Spectrum Analyzer", "9", R.drawable.ic_menu_camera, SpectrumAnalyzerActivity::class.java)
+				ModeData("VU Meter", "1", R.drawable.ic_volume, VuMeterActivity::class.java),
+				ModeData("Rainbow", "2", R.drawable.ic_rainbow, RainbowActivity::class.java),
+				ModeData("Strips", "3", R.drawable.ic_semaphore, StripsActivity::class.java),
+				ModeData("Stroboscope", "6", R.drawable.ic_light_bulb, StroboscopeActivity::class.java),
+				ModeData("Backlight", "7", R.drawable.ic_lamp, BacklightActivity::class.java),
+				ModeData("Frequencies", "8", R.drawable.ic_studio_light, RunningFrequenciesActivity::class.java),
+				ModeData("Spectrum Analyzer", "9", R.drawable.ic_light_bulbs, SpectrumAnalyzerActivity::class.java)
 		)
 
 		recyclerview.layoutManager = GridLayoutManager(this, 3)
