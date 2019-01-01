@@ -25,6 +25,7 @@ class ModeAdapter(private val context: Context,
 		val modeData = items[position]
 
 		holder.modeNameTextView.text = modeData.name
+		holder.modeIconImageView.setImageResource(modeData.icon)
 		holder.cardView.setOnClickListener {
 			BluetoothHandler.sendData(modeData.command)
 			context.startActivity(Intent(context, modeData.activity))
@@ -34,5 +35,6 @@ class ModeAdapter(private val context: Context,
 
 class ModeViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 	val modeNameTextView = view.mode_name_text_view!!
+	val modeIconImageView = view.mode_icon_image_view!!
 	val cardView = view.mode_card_view!!
 }
