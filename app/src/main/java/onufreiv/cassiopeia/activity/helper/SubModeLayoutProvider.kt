@@ -1,13 +1,14 @@
-package onufreiv.cassiopeia
+package onufreiv.cassiopeia.activity.helper
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
 import android.widget.Button
 import android.widget.LinearLayout
+import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.mode.Mode
 
-object SubModesHelper {
+object SubModeLayoutProvider {
 
 	fun showPrimarySubModes(context: Context,
 	                        modeControlLayout: ConstraintLayout,
@@ -23,7 +24,7 @@ object SubModesHelper {
 				BluetoothHandler.sendCommand(subMode.command!!)
 
 				if (subMode.settings.orEmpty().isNotEmpty())
-					ModeSettingsHelper.showModeSettings(context, modeControlLayout, subMode)
+					SettingsLayoutProvider.showModeSettings(context, modeControlLayout, subMode)
 
 				fillLayoutWithSecondarySubModes(context, modeControlLayout, subMode)
 			}
@@ -49,7 +50,7 @@ object SubModesHelper {
 				BluetoothHandler.sendCommand(subMode.command!!)
 
 				if (subMode.settings.orEmpty().isNotEmpty())
-					ModeSettingsHelper.showModeSettings(context, generalModeLayout, subMode)
+					SettingsLayoutProvider.showModeSettings(context, generalModeLayout, subMode)
 			}
 			button.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
 					LinearLayout.LayoutParams.MATCH_PARENT, 1f)

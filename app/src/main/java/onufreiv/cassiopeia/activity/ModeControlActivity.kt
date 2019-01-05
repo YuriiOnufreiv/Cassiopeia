@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toolbar
-import onufreiv.cassiopeia.ModeSettingsHelper.showModeSettings
+import onufreiv.cassiopeia.activity.helper.SettingsLayoutProvider.showModeSettings
 import onufreiv.cassiopeia.R
-import onufreiv.cassiopeia.SubModesHelper.showPrimarySubModes
+import onufreiv.cassiopeia.activity.helper.SubModeLayoutProvider.showPrimarySubModes
 import onufreiv.cassiopeia.mode.Mode
 import onufreiv.cassiopeia.mode.ModeService
 

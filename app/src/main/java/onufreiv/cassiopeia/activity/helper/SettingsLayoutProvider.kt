@@ -1,4 +1,4 @@
-package onufreiv.cassiopeia
+package onufreiv.cassiopeia.activity.helper
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
@@ -6,11 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.mode_settings.view.*
+import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.mode.Mode
 import onufreiv.cassiopeia.mode.Settings
 
-object ModeSettingsHelper {
+object SettingsLayoutProvider {
 
 	fun showModeSettings(context: Context,
 	                             modeControlLayout: ConstraintLayout,
