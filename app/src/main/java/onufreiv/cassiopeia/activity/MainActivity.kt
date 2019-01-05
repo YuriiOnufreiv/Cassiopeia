@@ -17,8 +17,7 @@ import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
 import onufreiv.cassiopeia.adapter.ModeAdapter
 import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.arduino.Command
-import onufreiv.cassiopeia.mode.Mode
-import onufreiv.cassiopeia.mode.ModeData
+import onufreiv.cassiopeia.mode.ModeService
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,18 +32,10 @@ class MainActivity : AppCompatActivity() {
 
 		enableBluetooth()
 
-		val modes = listOf(
-				ModeData(Mode.VU_METER, VuMeterActivity::class.java),
-				ModeData(Mode.RAINBOW, RainbowActivity::class.java),
-				ModeData(Mode.STRIPS, StripsActivity::class.java),
-				ModeData(Mode.STROBOSCOPE, StroboscopeActivity::class.java),
-				ModeData(Mode.BACKLIGHT, BacklightActivity::class.java),
-				ModeData(Mode.FREQUENCIES, RunningFrequenciesActivity::class.java),
-				ModeData(Mode.SPECTRUM, SpectrumAnalyzerActivity::class.java)
-		)
+		val mainModes = ModeService.getMainModes()
 
 		recyclerview.layoutManager = GridLayoutManager(this, 3)
-		recyclerview.adapter = ModeAdapter(this, modes)
+		recyclerview.adapter = ModeAdapter(this, mainModes)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {

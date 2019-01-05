@@ -22,13 +22,14 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
-		<activity android:name=".activity.VuMeterActivity" />
-		<activity android:name=".activity.RainbowActivity" />
-		<activity android:name=".activity.StripsActivity"></activity>
-		<activity android:name=".activity.RunningFrequenciesActivity"></activity>
-		<activity android:name=".activity.SpectrumAnalyzerActivity"></activity>
-		<activity android:name=".activity.BacklightActivity"></activity>
-		<activity android:name=".activity.StroboscopeActivity"></activity>
+		<!--<activity android:name=".activity.VuMeterActivity" />-->
+		<!--<activity android:name=".activity.RainbowActivity" />-->
+		<!--<activity android:name=".activity.StripsActivity"></activity>-->
+		<!--<activity android:name=".activity.RunningFrequenciesActivity"></activity>-->
+		<!--<activity android:name=".activity.SpectrumAnalyzerActivity"></activity>-->
+		<!--<activity android:name=".activity.BacklightActivity"></activity>-->
+		<!--<activity android:name=".activity.StroboscopeActivity"></activity>-->
+		<activity android:name=".activity.ModeControlActivity"></activity>
 	</application>
 
 </manifest>

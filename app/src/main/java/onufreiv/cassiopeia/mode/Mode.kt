@@ -1,16 +1,31 @@
 package onufreiv.cassiopeia.mode
 
 import onufreiv.cassiopeia.arduino.Command
-import onufreiv.cassiopeia.R
 
-enum class Mode(val id: String,
-                val icon: Int,
-                val command: Command) {
-	VU_METER("VU Meter", R.drawable.ic_volume, Command.ONE),
-	RAINBOW("Rainbow", R.drawable.ic_rainbow, Command.TWO),
-	STRIPS("Strips", R.drawable.ic_semaphore, Command.THREE),
-	STROBOSCOPE("Stroboscope", R.drawable.ic_light_bulb, Command.SIX),
-	BACKLIGHT("Backlight", R.drawable.ic_lamp, Command.SEVEN),
-	FREQUENCIES("Frequencies", R.drawable.ic_studio_light, Command.EIGHT),
-	SPECTRUM("Spectrum", R.drawable.ic_light_bulbs, Command.NINE)
+class Mode private constructor(val name: String?,
+                               val command: Command?,
+                               val icon: Int?,
+                               val settings: List<Settings>?,
+                               val subModes: List<Mode>?) {
+
+	data class Builder(var name: String? = null,
+	                   var command: Command? = null,
+	                   var icon: Int? = null,
+	                   var settings: List<Settings>? = null,
+	                   var subModes: List<Mode>? = null) {
+
+		fun name(name: String) = apply { this.name = name }
+
+		fun command(command: Command) = apply { this.command = command }
+
+		fun icon(icon: Int) = apply { this.icon = icon }
+
+		fun settings(vararg settings: Settings) = apply { this.settings = settings.asList() }
+
+		fun subModes(vararg subModes: Mode) = apply { this.subModes = subModes.asList() }
+
+		fun noSubModes() = apply { this.subModes = emptyList() }
+
+		fun build() = Mode(name, command, icon, settings, subModes)
+	}
 }

@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
-import onufreiv.cassiopeia.arduino.BluetoothHandler
-import onufreiv.cassiopeia.mode.ModeData
 import onufreiv.cassiopeia.R
+import onufreiv.cassiopeia.activity.ModeControlActivity
+import onufreiv.cassiopeia.arduino.BluetoothHandler
+import onufreiv.cassiopeia.mode.Mode
 
 class ModeAdapter(private val context: Context,
-                  private val items: List<ModeData>)
+                  private val items: List<Mode>)
 	: RecyclerView.Adapter<ModeViewHolder>() {
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModeViewHolder {
@@ -25,14 +26,24 @@ class ModeAdapter(private val context: Context,
 	}
 
 	override fun onBindViewHolder(holder: ModeViewHolder, position: Int) {
-		val modeData = items[position]
+		val mode = items[position]
 
-		holder.modeNameTextView.text = modeData.mode.id
-		holder.modeIconImageView.setImageResource(modeData.mode.icon)
+		holder.modeNameTextView.text = mode.name
+		holder.modeIconImageView.setImageResource(mode.icon!!)
 		holder.cardView.setOnClickListener {
-			BluetoothHandler.sendCommand(modeData.mode.command)
-			context.startActivity(Intent(context, modeData.activity))
+			turnOnMode(mode)
+			startModeControlActivity(mode)
 		}
+	}
+
+	private fun turnOnMode(mode: Mode) {
+		BluetoothHandler.sendCommand(mode.command!!)
+	}
+
+	private fun startModeControlActivity(mode: Mode) {
+		val intent = Intent(context, ModeControlActivity::class.java)
+		intent.putExtra(ModeControlActivity.EXTRA_KEY_MODE, mode.name)
+		context.startActivity(intent)
 	}
 }
 
