@@ -5,107 +5,86 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.design.widget.NavigationView
-import android.support.v4.view.GravityCompat
-import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import onufreiv.cassiopeia.BluetoothDeviceAdapter
-import onufreiv.cassiopeia.BluetoothHandler
-import onufreiv.cassiopeia.R
+import kotlinx.android.synthetic.main.content_main.*
+import onufreiv.cassiopeia.*
+import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
+import onufreiv.cassiopeia.adapter.ModeAdapter
+import onufreiv.cassiopeia.arduino.BluetoothHandler
+import onufreiv.cassiopeia.arduino.Command
+import onufreiv.cassiopeia.mode.Mode
+import onufreiv.cassiopeia.mode.ModeData
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setContentView(R.layout.activity_main)
+		setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+		fab.setOnClickListener {
+			startActivity(Intent(this, PocMainActivity::class.java))
+		}
 
-        val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
+		enableBluetooth()
 
-        nav_view.setNavigationItemSelectedListener(this)
+		val modes = listOf(
+				ModeData(Mode.VU_METER, VuMeterActivity::class.java),
+				ModeData(Mode.RAINBOW, RainbowActivity::class.java),
+				ModeData(Mode.STRIPS, StripsActivity::class.java),
+				ModeData(Mode.STROBOSCOPE, StroboscopeActivity::class.java),
+				ModeData(Mode.BACKLIGHT, BacklightActivity::class.java),
+				ModeData(Mode.FREQUENCIES, RunningFrequenciesActivity::class.java),
+				ModeData(Mode.SPECTRUM, SpectrumAnalyzerActivity::class.java)
+		)
 
-        enableBluetooth()
-    }
+		recyclerview.layoutManager = GridLayoutManager(this, 3)
+		recyclerview.adapter = ModeAdapter(this, modes)
+	}
 
-    override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
-        } else {
-            super.onBackPressed()
-        }
-    }
+	override fun onCreateOptionsMenu(menu: Menu): Boolean {
+		menuInflater.inflate(R.menu.main, menu)
+		return true
+	}
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		return when (item.itemId) {
+			R.id.action_settings -> true
+			R.id.action_power -> {
+				BluetoothHandler.sendCommand(Command.STAR)
+				true
+			}
+			else -> super.onOptionsItemSelected(item)
+		}
+	}
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.nav_camera -> {
+		if (requestCode == 0)
+			when (resultCode) {
+				Activity.RESULT_OK -> selectDevice()
+			}
+	}
 
-            }
-            R.id.nav_gallery -> {
+	private fun enableBluetooth() {
+		val turnOn = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+		startActivityForResult(turnOn, 0)
+	}
 
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_poc -> {
-                startActivity(Intent(this, PocMainActivity::class.java))
-            }
-        }
-
-        drawer_layout.closeDrawer(GravityCompat.START)
-        return true
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 0)
-            when(resultCode) {
-                Activity.RESULT_OK -> selectDevice()
-            }
-    }
-
-    private fun enableBluetooth() {
-        val turnOn = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-        startActivityForResult(turnOn, 0)
-    }
-
-    private fun selectDevice() {
-        AlertDialog.Builder(this)
-                .setAdapter(BluetoothDeviceAdapter(BluetoothHandler.getPairedDevicesList(), this)) { dialog, i ->
-                    val bluetoothDevice = (dialog as AlertDialog).listView.adapter.getItem(i) as BluetoothDevice
-                    BluetoothHandler.startConnection(bluetoothDevice)
-                }
-                .setTitle(getString(R.string.select_bluetooth_device))
-                .create()
-                .show()
-    }
+	private fun selectDevice() {
+		AlertDialog.Builder(this)
+				.setAdapter(BluetoothDeviceAdapter(BluetoothHandler.getPairedDevicesList(), this)) { dialog, i ->
+					val bluetoothDevice = (dialog as AlertDialog).listView.adapter.getItem(i) as BluetoothDevice
+					BluetoothHandler.startConnection(bluetoothDevice)
+				}
+				.setTitle(getString(R.string.select_bluetooth_device))
+				.create()
+				.show()
+	}
 }
