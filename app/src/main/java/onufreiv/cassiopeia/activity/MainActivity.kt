@@ -46,6 +46,17 @@ class MainActivity : AppCompatActivity() {
 				BluetoothHandler.sendCommand(Command.STAR)
 				true
 			}
+			R.id.action_calibrate -> {
+				AlertDialog.Builder(this)
+						.setTitle("Calibrate")
+						.setMessage("Do you want to perform calibration?")
+						.setPositiveButton("OK") { _, _->
+							BluetoothHandler.sendCommand(Command.ZERO) }
+						.setNegativeButton("No") { _, _-> }
+						.show()
+
+				true
+			}
 			else -> super.onOptionsItemSelected(item)
 		}
 	}
