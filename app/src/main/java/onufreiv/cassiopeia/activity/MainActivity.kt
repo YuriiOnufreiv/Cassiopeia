@@ -13,6 +13,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import onufreiv.cassiopeia.*
+import onufreiv.cassiopeia.activity.helper.SettingsLayoutProvider
 import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
 import onufreiv.cassiopeia.adapter.ModeAdapter
 import onufreiv.cassiopeia.arduino.BluetoothHandler
@@ -41,7 +42,18 @@ class MainActivity : AppCompatActivity() {
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		return when (item.itemId) {
-			R.id.action_settings -> true
+			R.id.action_brightness -> {
+				val generalMode = ModeService.getModeWithCommonSettings()
+				BluetoothHandler.sendCommand(generalMode.command!!)
+				AlertDialog.Builder(this)
+						.setTitle("Brightness")
+						.setView(SettingsLayoutProvider.createModeSettingsLayout(this, generalMode))
+						.setPositiveButton("OK") { _, _->
+							BluetoothHandler.sendCommand(generalMode.command) }
+						.setOnCancelListener {BluetoothHandler.sendCommand(generalMode.command)}
+						.show()
+				true
+			}
 			R.id.action_power -> {
 				BluetoothHandler.sendCommand(Command.STAR)
 				true
