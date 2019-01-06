@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		return when (item.itemId) {
+			R.id.action_power -> {
+				BluetoothHandler.sendCommand(Command.STAR)
+				true
+			}
 			R.id.action_brightness -> {
 				val generalMode = ModeService.getModeWithCommonSettings()
 				BluetoothHandler.sendCommand(generalMode.command!!)
@@ -52,10 +56,6 @@ class MainActivity : AppCompatActivity() {
 							BluetoothHandler.sendCommand(generalMode.command) }
 						.setOnCancelListener {BluetoothHandler.sendCommand(generalMode.command)}
 						.show()
-				true
-			}
-			R.id.action_power -> {
-				BluetoothHandler.sendCommand(Command.STAR)
 				true
 			}
 			R.id.action_calibrate -> {
