@@ -43,30 +43,15 @@ class MainActivity : AppCompatActivity() {
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		return when (item.itemId) {
 			R.id.action_power -> {
-				BluetoothHandler.sendCommand(Command.STAR)
+				processPowerActionClick()
 				true
 			}
 			R.id.action_brightness -> {
-				val generalMode = ModeService.getModeWithCommonSettings()
-				BluetoothHandler.sendCommand(generalMode.command!!)
-				AlertDialog.Builder(this)
-						.setTitle("Brightness")
-						.setView(SettingsLayoutProvider.createModeSettingsLayout(this, generalMode))
-						.setPositiveButton("OK") { _, _->
-							BluetoothHandler.sendCommand(generalMode.command) }
-						.setOnCancelListener {BluetoothHandler.sendCommand(generalMode.command)}
-						.show()
+				processBrightnessActionClick()
 				true
 			}
 			R.id.action_calibrate -> {
-				AlertDialog.Builder(this)
-						.setTitle("Calibrate")
-						.setMessage("Do you want to perform calibration?")
-						.setPositiveButton("OK") { _, _->
-							BluetoothHandler.sendCommand(Command.ZERO) }
-						.setNegativeButton("No") { _, _-> }
-						.show()
-
+				processCalibrateActionClick()
 				true
 			}
 			else -> super.onOptionsItemSelected(item)
@@ -96,5 +81,34 @@ class MainActivity : AppCompatActivity() {
 				.setTitle(getString(R.string.select_bluetooth_device))
 				.create()
 				.show()
+	}
+
+	private fun processCalibrateActionClick() {
+		AlertDialog.Builder(this)
+				.setTitle("Calibrate")
+				.setMessage("Do you want to perform calibration?")
+				.setPositiveButton("OK") { _, _ ->
+					BluetoothHandler.sendCommand(Command.ZERO)
+				}
+				.setNegativeButton("No") { _, _ -> }
+				.show()
+	}
+
+	private fun processBrightnessActionClick() {
+		val generalMode = ModeService.getModeWithCommonSettings()
+		val command = generalMode.command!!
+		AlertDialog.Builder(this)
+				.setTitle("Brightness")
+				.setView(SettingsLayoutProvider
+						.createModeSettingsLayout(this, generalMode))
+				.setPositiveButton("OK") { _, _ ->
+					BluetoothHandler.sendCommand(command)
+				}
+				.setOnCancelListener { BluetoothHandler.sendCommand(command) }
+				.show()
+	}
+
+	private fun processPowerActionClick() {
+		BluetoothHandler.sendCommand(Command.STAR)
 	}
 }
