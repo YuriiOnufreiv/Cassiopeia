@@ -13,6 +13,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import onufreiv.cassiopeia.*
+import onufreiv.cassiopeia.activity.helper.SettingsLayoutProvider
 import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
 import onufreiv.cassiopeia.adapter.ModeAdapter
 import onufreiv.cassiopeia.arduino.BluetoothHandler
@@ -41,9 +42,16 @@ class MainActivity : AppCompatActivity() {
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		return when (item.itemId) {
-			R.id.action_settings -> true
 			R.id.action_power -> {
-				BluetoothHandler.sendCommand(Command.STAR)
+				processPowerActionClick()
+				true
+			}
+			R.id.action_brightness -> {
+				processBrightnessActionClick()
+				true
+			}
+			R.id.action_calibrate -> {
+				processCalibrateActionClick()
 				true
 			}
 			else -> super.onOptionsItemSelected(item)
@@ -73,5 +81,34 @@ class MainActivity : AppCompatActivity() {
 				.setTitle(getString(R.string.select_bluetooth_device))
 				.create()
 				.show()
+	}
+
+	private fun processCalibrateActionClick() {
+		AlertDialog.Builder(this)
+				.setTitle("Calibrate")
+				.setMessage("Do you want to perform calibration?")
+				.setPositiveButton("OK") { _, _ ->
+					BluetoothHandler.sendCommand(Command.ZERO)
+				}
+				.setNegativeButton("No") { _, _ -> }
+				.show()
+	}
+
+	private fun processBrightnessActionClick() {
+		val generalMode = ModeService.getModeWithCommonSettings()
+		val command = generalMode.command!!
+		AlertDialog.Builder(this)
+				.setTitle("Brightness")
+				.setView(SettingsLayoutProvider
+						.createModeSettingsLayout(this, generalMode))
+				.setPositiveButton("OK") { _, _ ->
+					BluetoothHandler.sendCommand(command)
+				}
+				.setOnCancelListener { BluetoothHandler.sendCommand(command) }
+				.show()
+	}
+
+	private fun processPowerActionClick() {
+		BluetoothHandler.sendCommand(Command.STAR)
 	}
 }

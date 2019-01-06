@@ -3,15 +3,21 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<item
-		android:id="@+id/action_settings"
+		android:id="@+id/action_power"
+		android:icon="@drawable/ic_power"
 		android:orderInCategory="100"
-		android:title="@string/action_settings"
+		android:title="@string/action_on_off"
+		app:showAsAction="ifRoom" />
+
+	<item
+		android:id="@+id/action_brightness"
+		android:orderInCategory="100"
+		android:title="@string/action_brightness"
 		app:showAsAction="never" />
 
 	<item
-		android:id="@+id/action_power"
+		android:id="@+id/action_calibrate"
 		android:orderInCategory="100"
-		android:title="@string/action_on_off"
-		android:icon="@drawable/ic_power"
-		app:showAsAction="ifRoom" />
+		android:title="@string/action_calibrate"
+		app:showAsAction="never" />
 </menu>

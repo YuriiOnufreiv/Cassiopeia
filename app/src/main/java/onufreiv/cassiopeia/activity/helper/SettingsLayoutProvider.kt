@@ -5,6 +5,7 @@ import android.support.constraint.ConstraintLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
 import kotlinx.android.synthetic.main.mode_settings.view.*
 import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.arduino.BluetoothHandler
@@ -14,17 +15,36 @@ import onufreiv.cassiopeia.mode.Settings
 object SettingsLayoutProvider {
 
 	fun showModeSettings(context: Context,
-	                             modeControlLayout: ConstraintLayout,
-	                             mode: Mode) {
+	                     modeControlLayout: ConstraintLayout,
+	                     mode: Mode) {
 
 		val settingsLayout = modeControlLayout
 				.getViewById(R.id.mode_settings) as LinearLayout
 		settingsLayout.removeAllViews()
 
+		settingsLayout.addView(createModeSettingsLayout(context, mode))
+	}
+
+	fun createModeSettingsLayout(context: Context, mode: Mode): LinearLayout {
+		val linearLayout = createEmptyLayout(context)
+
 		mode.settings.orEmpty().forEach {
 			val singleSettingsLayout = createSingleSettingsLayout(context, it)
-			settingsLayout.addView(singleSettingsLayout)
+			linearLayout.addView(singleSettingsLayout)
 		}
+
+		return linearLayout
+	}
+
+	private fun createEmptyLayout(context: Context): LinearLayout {
+		val linearLayout = LinearLayout(context)
+		linearLayout.layoutParams = LayoutParams(
+				LayoutParams.MATCH_PARENT,
+				LayoutParams.WRAP_CONTENT,
+				1f
+		)
+		linearLayout.orientation = LinearLayout.VERTICAL
+		return linearLayout
 	}
 
 	private fun createSingleSettingsLayout(context: Context,
