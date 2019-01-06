@@ -12,6 +12,16 @@ object ModeService {
 		return getMainModes().first { it.name.equals(name) }
 	}
 
+	fun getModeWithCommonSettings(): Mode {
+		return Mode.Builder()
+				.name("Common settings mode")
+				.command(Command.OK)
+				.settings(horSettings("Active LED"),
+						verSettings("Inactive LED"))
+				.noSubModes()
+				.build()
+	}
+
 	fun getVuMeterMode(): Mode {
 		return Mode.Builder()
 				.name("VU Meter")
