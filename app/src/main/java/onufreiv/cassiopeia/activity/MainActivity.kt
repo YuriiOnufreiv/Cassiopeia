@@ -26,10 +26,6 @@ class MainActivity : AppCompatActivity() {
 		setContentView(R.layout.activity_main)
 		setSupportActionBar(toolbar)
 
-		fab.setOnClickListener {
-			startActivity(Intent(this, PocMainActivity::class.java))
-		}
-
 		enableBluetooth()
 
 		val mainModes = ModeService.getMainModes()
