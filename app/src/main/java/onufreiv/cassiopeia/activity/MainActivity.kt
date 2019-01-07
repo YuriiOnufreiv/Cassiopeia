@@ -97,6 +97,7 @@ class MainActivity : AppCompatActivity() {
 	private fun processBrightnessActionClick() {
 		val generalMode = ModeService.getModeWithCommonSettings()
 		val command = generalMode.command!!
+		BluetoothHandler.sendCommand(command)
 		AlertDialog.Builder(this)
 				.setTitle("Brightness")
 				.setView(SettingsLayoutProvider
