@@ -18,12 +18,15 @@ object BluetoothHandler {
 
 	fun getPairedDevicesList(): List<BluetoothDevice> = bluetoothAdapter.bondedDevices.toList()
 
-	fun sendData(message: String) {
-		val data = message.toByteArray()
-		outputStream.write(data)
+	fun sendCommand(command: Command.Mode) {
+		sendData(command.value)
 	}
 
-	fun sendCommand(command: Command) {
+	fun sendCommand(command: Command.Settings) {
+		sendData(command.value)
+	}
+
+	fun sendCommand(command: Command.Common) {
 		sendData(command.value)
 	}
 
@@ -41,5 +44,8 @@ object BluetoothHandler {
 		outputStream.close()
 	}
 
-
+	private fun sendData(message: String) {
+		val data = message.toByteArray()
+		outputStream.write(data)
+	}
 }

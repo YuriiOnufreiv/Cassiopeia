@@ -15,7 +15,7 @@ object ModeService {
 	fun getModeWithCommonSettings(): Mode {
 		return Mode.Builder()
 				.name("Common settings mode")
-				.command(Command.OK)
+				.command(Command.Mode.COMMON)
 				.settings(horSettings("Active LED"),
 						verSettings("Inactive LED"))
 				.noSubModes()
@@ -25,7 +25,7 @@ object ModeService {
 	fun getVuMeterMode(): Mode {
 		return Mode.Builder()
 				.name("VU Meter")
-				.command(Command.ONE)
+				.command(Command.Mode.VU_METER)
 				.icon(R.drawable.ic_volume)
 				.settings(horSettings("Smoothness"))
 				.noSubModes()
@@ -35,7 +35,7 @@ object ModeService {
 	fun getRainbowMode(): Mode {
 		return Mode.Builder()
 				.name("Rainbow")
-				.command(Command.TWO)
+				.command(Command.Mode.RAINBOW)
 				.icon(R.drawable.ic_rainbow)
 				.settings(horSettings("Smoothness"), verSettings("Speed"))
 				.noSubModes()
@@ -45,7 +45,7 @@ object ModeService {
 	fun getStripsMode(): Mode {
 		return Mode.Builder()
 				.name("Strips")
-				.command(Command.THREE)
+				.command(Command.Mode.STRIPS_FIVE)
 				.icon(R.drawable.ic_semaphore)
 				.settings(horSettings("Smoothness"), verSettings("Sensitivity"))
 				.subModes(getOneStripMode(), getThreeStripsMode(), getFiveStripsMode())
@@ -55,7 +55,7 @@ object ModeService {
 	fun getStroboscopeMode(): Mode {
 		return Mode.Builder()
 				.name("Stroboscope")
-				.command(Command.SIX)
+				.command(Command.Mode.STROBOSCOPE)
 				.icon(R.drawable.ic_light_bulb)
 				.settings(horSettings("Smoothness"), verSettings("Frequency"))
 				.noSubModes()
@@ -65,7 +65,7 @@ object ModeService {
 	fun getBacklightMode(): Mode {
 		return Mode.Builder()
 				.name("Backlight")
-				.command(Command.SEVEN)
+				.command(Command.Mode.BACKLIGHT_PERMANENT)
 				.icon(R.drawable.ic_lamp)
 				.settings(horSettings("Color/Speed"), verSettings("Saturation/Rainbow step"))
 				.subModes(getPermanentBacklightMode(), getChangingBacklightMode(), getRainbowBacklightMode())
@@ -75,7 +75,7 @@ object ModeService {
 	fun getFrequenciesMode(): Mode {
 		return Mode.Builder()
 				.name("Frequencies")
-				.command(Command.EIGHT)
+				.command(Command.Mode.FREQUENCIES_ALL)
 				.icon(R.drawable.ic_studio_light)
 				.settings(horSettings("Speed"), verSettings("Sensitivity"))
 				.subModes(getAllFrequenciesSubMode(), getLowFrequenciesSubMode(),
@@ -86,7 +86,7 @@ object ModeService {
 	fun getSpectrumMode(): Mode {
 		return Mode.Builder()
 				.name("Spectrum")
-				.command(Command.SEVEN)
+				.command(Command.Mode.SPECTRUM)
 				.icon(R.drawable.ic_light_bulbs)
 				.settings(horSettings("Color Step"), verSettings("Color"))
 				.noSubModes()
@@ -96,35 +96,35 @@ object ModeService {
 	private fun getAllFrequenciesStripSubMode(): Mode {
 		return Mode.Builder()
 				.name("All")
-				.command(Command.HASH)
+				.command(Command.Mode.STRIPS_ONE_ALL)
 				.build()
 	}
 
 	private fun getLowFrequenciesStripSubMode(): Mode {
 		return Mode.Builder()
 				.name("Low")
-				.command(Command.HASH)
+				.command(Command.Mode.STRIPS_ONE_LOW)
 				.build()
 	}
 
 	private fun getMediumFrequenciesStripSubMode(): Mode {
 		return Mode.Builder()
 				.name("Medium")
-				.command(Command.HASH)
+				.command(Command.Mode.STRIPS_ONE_MEDIUM)
 				.build()
 	}
 
 	private fun getHighFrequenciesStripSubMode(): Mode {
 		return Mode.Builder()
 				.name("High")
-				.command(Command.HASH)
+				.command(Command.Mode.STRIPS_ONE_HIGH)
 				.build()
 	}
 
 	private fun getOneStripMode(): Mode {
 		return Mode.Builder()
 				.name("1 Strip")
-				.command(Command.FIVE)
+				.command(Command.Mode.STRIPS_ONE_ALL)
 				.subModes(getAllFrequenciesStripSubMode(), getLowFrequenciesStripSubMode(),
 						getMediumFrequenciesStripSubMode(), getHighFrequenciesStripSubMode())
 				.build()
@@ -133,21 +133,21 @@ object ModeService {
 	private fun getThreeStripsMode(): Mode {
 		return Mode.Builder()
 				.name("3 Strips")
-				.command(Command.FOUR)
+				.command(Command.Mode.STRIPS_THREE)
 				.build()
 	}
 
 	private fun getFiveStripsMode(): Mode {
 		return Mode.Builder()
 				.name("5 Strips")
-				.command(Command.THREE)
+				.command(Command.Mode.STRIPS_FIVE)
 				.build()
 	}
 
 	private fun getPermanentBacklightMode(): Mode {
 		return Mode.Builder()
 				.name("Permanent")
-				.command(Command.HASH)
+				.command(Command.Mode.BACKLIGHT_PERMANENT)
 				.settings(horSettings("Color"), verSettings("Saturation"))
 				.noSubModes()
 				.build()
@@ -156,7 +156,7 @@ object ModeService {
 	private fun getChangingBacklightMode(): Mode {
 		return Mode.Builder()
 				.name("Changing")
-				.command(Command.HASH)
+				.command(Command.Mode.BACKLIGHT_CHANGING)
 				.settings(horSettings("Speed"), verSettings("Saturation"))
 				.noSubModes()
 				.build()
@@ -165,7 +165,7 @@ object ModeService {
 	private fun getRainbowBacklightMode(): Mode {
 		return Mode.Builder()
 				.name("Rainbow")
-				.command(Command.HASH)
+				.command(Command.Mode.BACKLIGHT_RAINBOW)
 				.settings(horSettings("Speed"), verSettings("Rainbow step"))
 				.noSubModes()
 				.build()
@@ -174,28 +174,28 @@ object ModeService {
 	private fun getAllFrequenciesSubMode(): Mode {
 		return Mode.Builder()
 				.name("All")
-				.command(Command.HASH)
+				.command(Command.Mode.FREQUENCIES_ALL)
 				.build()
 	}
 
 	private fun getLowFrequenciesSubMode(): Mode {
 		return Mode.Builder()
 				.name("Low")
-				.command(Command.HASH)
+				.command(Command.Mode.FREQUENCIES_LOW)
 				.build()
 	}
 
 	private fun getMediumFrequenciesSubMode(): Mode {
 		return Mode.Builder()
 				.name("Medium")
-				.command(Command.HASH)
+				.command(Command.Mode.FREQUENCIES_MEDIUM)
 				.build()
 	}
 
 	private fun getHighFrequenciesSubMode(): Mode {
 		return Mode.Builder()
 				.name("High")
-				.command(Command.HASH)
+				.command(Command.Mode.FREQUENCIES_HIGH)
 				.build()
 	}
 

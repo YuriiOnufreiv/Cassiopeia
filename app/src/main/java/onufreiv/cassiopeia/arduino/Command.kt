@@ -1,21 +1,36 @@
 package onufreiv.cassiopeia.arduino
 
-enum class Command(val value: String) {
-	ONE("1"),
-	TWO("2"),
-	THREE("3"),
-	FOUR("4"),
-	FIVE("5"),
-	SIX("6"),
-	SEVEN("7"),
-	EIGHT("8"),
-	NINE("9"),
-	ZERO("0"),
-	UP("u"),
-	DOWN("d"),
-	LEFT("l"),
-	RIGHT("r"),
-	STAR("*"),
-	HASH("#"),
-	OK("o")
+class Command {
+	enum class Mode(val value: String) {
+		VU_METER("a"),
+		RAINBOW("b"),
+		STRIPS_FIVE("c"),
+		STRIPS_THREE("d"),
+		STRIPS_ONE_ALL("e"),
+		STRIPS_ONE_LOW("f"),
+		STRIPS_ONE_MEDIUM("g"),
+		STRIPS_ONE_HIGH("h"),
+		SPECTRUM("i"),
+		BACKLIGHT_PERMANENT("j"),
+		BACKLIGHT_CHANGING("k"),
+		BACKLIGHT_RAINBOW("l"),
+		FREQUENCIES_ALL("m"),
+		FREQUENCIES_LOW("n"),
+		FREQUENCIES_MEDIUM("o"),
+		FREQUENCIES_HIGH("p"),
+		STROBOSCOPE("q"),
+		COMMON("@")
+	}
+
+	enum class Settings(val value: String) {
+		A_DEC("-"),
+		A_INC("+"),
+		B_DEC("<"),
+		B_INC(">")
+	}
+
+	enum class Common(val value: String) {
+		POWER("*"),
+		NOISE_CALIBRATION("#")
+	}
 }
