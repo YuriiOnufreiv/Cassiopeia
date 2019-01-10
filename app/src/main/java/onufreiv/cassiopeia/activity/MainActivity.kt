@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 				.setTitle("Calibrate")
 				.setMessage("Do you want to perform calibration?")
 				.setPositiveButton("OK") { _, _ ->
-					BluetoothHandler.sendCommand(Command.ZERO)
+					BluetoothHandler.sendCommand(Command.Common.NOISE_CALIBRATION)
 				}
 				.setNegativeButton("No") { _, _ -> }
 				.show()
@@ -110,6 +110,6 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun processPowerActionClick() {
-		BluetoothHandler.sendCommand(Command.STAR)
+		BluetoothHandler.sendCommand(Command.Common.POWER)
 	}
 }
