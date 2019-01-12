@@ -5,11 +5,24 @@ import onufreiv.cassiopeia.arduino.Command
 
 object ModeService {
 
-	fun getMainModes(): List<Mode> = listOf(getVuMeterMode(), getRainbowMode(), getStripsMode(),
-			getStroboscopeMode(), getBacklightMode(), getFrequenciesMode(), getSpectrumMode())
+	fun getMainModes(): List<Mode> = listOf(
+			getVuMeterMode(), getRainbowMode(),
+			getStripsMode(), getStroboscopeMode(),
+			getBacklightMode(), getFrequenciesMode(),
+			getSpectrumMode(), getStartUpEffectMode()
+	)
 
 	fun getMode(name: String): Mode {
 		return getMainModes().first { it.name.equals(name) }
+	}
+
+	private fun getStartUpEffectMode(): Mode {
+		return Mode.Builder()
+				.name("Start Up")
+				.command(Command.Mode.START_UP_EFFECT)
+				.icon(R.drawable.ic_start_up)
+				.subModes(getMeteorRainEffect(), getColorWipeEffect(), getCylonBounceEffect())
+				.build()
 	}
 
 	fun getModeWithCommonSettings(): Mode {
@@ -196,6 +209,27 @@ object ModeService {
 		return Mode.Builder()
 				.name("High")
 				.command(Command.Mode.FREQUENCIES_HIGH)
+				.build()
+	}
+
+	private fun getMeteorRainEffect(): Mode {
+		return Mode.Builder()
+				.name("Meteor Rain")
+				.command(Command.Mode.METEOR_RAIN_START_UP_EFFECT)
+				.build()
+	}
+
+	private fun getColorWipeEffect(): Mode {
+		return Mode.Builder()
+				.name("Color Wipe")
+				.command(Command.Mode.COLOR_WIPE_START_UP_EFFECT)
+				.build()
+	}
+
+	private fun getCylonBounceEffect(): Mode {
+		return Mode.Builder()
+				.name("Cylon Bounce")
+				.command(Command.Mode.CYLON_BOUNCE_START_UP_EFFECT)
 				.build()
 	}
 
