@@ -19,7 +19,11 @@ class Command {
 		FREQUENCIES_MEDIUM("o"),
 		FREQUENCIES_HIGH("p"),
 		STROBOSCOPE("q"),
-		COMMON("@")
+		COMMON("@"),
+		METEOR_RAIN_START_UP_EFFECT("0"),
+		COLOR_WIPE_START_UP_EFFECT("1"),
+		CYLON_BOUNCE_START_UP_EFFECT("2"),
+		START_UP_EFFECT("")
 	}
 
 	enum class Settings(val value: String) {
