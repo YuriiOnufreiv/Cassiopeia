@@ -14,7 +14,7 @@ val arduinoLed: ArduinoLedBluetoothHandler by lazy {
 class Cassiopeia : Application() {
 	companion object {
 		var prefs: Preferences? = null
-		var arduinoLedBluetoothHandler: ArduinoLedBluetoothHandler? = null
+		var arduinoLedBluetoothHandler = ArduinoLedBluetoothHandler()
 	}
 
 	override fun onCreate() {
