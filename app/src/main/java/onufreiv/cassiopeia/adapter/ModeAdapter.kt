@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.mode_item_row.view.*
 import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.activity.ModeControlActivity
 import onufreiv.cassiopeia.mode.Mode
-import onufreiv.cassiopeia.prefs.arduinoLed
+import onufreiv.cassiopeia.arduinoLed
 
 class ModeAdapter(private val context: Context,
                   private val items: List<Mode>)

@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.mode_settings.view.*
 import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.mode.Mode
 import onufreiv.cassiopeia.mode.Settings
-import onufreiv.cassiopeia.prefs.arduinoLed
+import onufreiv.cassiopeia.arduinoLed
 
 object SettingsLayoutProvider {
 

@@ -6,7 +6,7 @@ import android.widget.Button
 import android.widget.LinearLayout
 import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.mode.Mode
-import onufreiv.cassiopeia.prefs.arduinoLed
+import onufreiv.cassiopeia.arduinoLed
 
 object SubModeLayoutProvider {
 

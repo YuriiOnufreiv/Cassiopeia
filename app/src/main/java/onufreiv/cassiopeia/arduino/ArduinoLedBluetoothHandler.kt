@@ -3,7 +3,7 @@ package onufreiv.cassiopeia.arduino
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
-import onufreiv.cassiopeia.prefs.prefs
+import onufreiv.cassiopeia.prefs
 import java.io.IOException
 import java.util.*
 

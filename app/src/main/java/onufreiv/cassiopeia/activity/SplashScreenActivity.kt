@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_splash_screen.*
 import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
 import onufreiv.cassiopeia.arduino.BluetoothDevicesObserver
-import onufreiv.cassiopeia.prefs.arduinoLed
-import onufreiv.cassiopeia.prefs.prefs
+import onufreiv.cassiopeia.arduinoLed
+import onufreiv.cassiopeia.prefs
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
