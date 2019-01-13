@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.recyclerview_item_row.view.*
+import kotlinx.android.synthetic.main.mode_item_row.view.*
 import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.activity.ModeControlActivity
 import onufreiv.cassiopeia.arduino.BluetoothHandler
@@ -18,7 +18,7 @@ class ModeAdapter(private val context: Context,
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ModeViewHolder {
 		return ModeViewHolder(LayoutInflater.from(context)
-				.inflate(R.layout.recyclerview_item_row, parent, false))
+				.inflate(R.layout.mode_item_row, parent, false))
 	}
 
 	override fun getItemCount(): Int {
