@@ -8,9 +8,9 @@ import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import kotlinx.android.synthetic.main.mode_settings.view.*
 import onufreiv.cassiopeia.R
-import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.mode.Mode
 import onufreiv.cassiopeia.mode.Settings
+import onufreiv.cassiopeia.prefs.arduinoLed
 
 object SettingsLayoutProvider {
 
@@ -55,10 +55,10 @@ object SettingsLayoutProvider {
 
 		modeSettingsLayout.settings_name.text = settings.name
 		modeSettingsLayout.settings_decrease_button.setOnClickListener {
-			BluetoothHandler.sendCommand(settings.decreaseCommand!!)
+			arduinoLed.sendCommand(settings.decreaseCommand)
 		}
 		modeSettingsLayout.settings_increase_button.setOnClickListener {
-			BluetoothHandler.sendCommand(settings.increaseCommand!!)
+			arduinoLed.sendCommand(settings.increaseCommand)
 		}
 		return modeSettingsLayout
 	}

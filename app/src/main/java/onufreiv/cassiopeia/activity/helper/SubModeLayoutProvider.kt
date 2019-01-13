@@ -5,8 +5,8 @@ import android.support.constraint.ConstraintLayout
 import android.widget.Button
 import android.widget.LinearLayout
 import onufreiv.cassiopeia.R
-import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.mode.Mode
+import onufreiv.cassiopeia.prefs.arduinoLed
 
 object SubModeLayoutProvider {
 
@@ -21,7 +21,7 @@ object SubModeLayoutProvider {
 			val button = Button(context)
 			button.text = subMode.name
 			button.setOnClickListener {
-				BluetoothHandler.sendCommand(subMode.command!!)
+				arduinoLed.sendCommand(subMode.command!!)
 
 				if (subMode.settings.orEmpty().isNotEmpty())
 					SettingsLayoutProvider.showModeSettings(context, modeControlLayout, subMode)
@@ -47,7 +47,7 @@ object SubModeLayoutProvider {
 			val button = Button(context)
 			button.text = subMode.name
 			button.setOnClickListener {
-				BluetoothHandler.sendCommand(subMode.command!!)
+				arduinoLed.sendCommand(subMode.command!!)
 
 				if (subMode.settings.orEmpty().isNotEmpty())
 					SettingsLayoutProvider.showModeSettings(context, generalModeLayout, subMode)
