@@ -1,9 +1,5 @@
 package onufreiv.cassiopeia.activity
 
-import android.app.Activity
-import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -12,13 +8,12 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.content_main_mode_selector.*
-import onufreiv.cassiopeia.*
+import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.activity.helper.SettingsLayoutProvider
-import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
 import onufreiv.cassiopeia.adapter.ModeAdapter
-import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.arduino.Command
 import onufreiv.cassiopeia.mode.ModeService
+import onufreiv.cassiopeia.prefs.arduinoLed
 
 class MainModeSelectorActivity : AppCompatActivity() {
 
@@ -26,8 +21,6 @@ class MainModeSelectorActivity : AppCompatActivity() {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main_mode_selector)
 		setSupportActionBar(toolbar)
-
-		enableBluetooth()
 
 		val mainModes = ModeService.getMainModes()
 
@@ -58,29 +51,9 @@ class MainModeSelectorActivity : AppCompatActivity() {
 		}
 	}
 
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		super.onActivityResult(requestCode, resultCode, data)
-
-		if (requestCode == 0)
-			when (resultCode) {
-				Activity.RESULT_OK -> selectDevice()
-			}
-	}
-
-	private fun enableBluetooth() {
-		val turnOn = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-		startActivityForResult(turnOn, 0)
-	}
-
-	private fun selectDevice() {
-		AlertDialog.Builder(this)
-				.setAdapter(BluetoothDeviceAdapter(BluetoothHandler.getPairedDevicesList(), this)) { dialog, i ->
-					val bluetoothDevice = (dialog as AlertDialog).listView.adapter.getItem(i) as BluetoothDevice
-					BluetoothHandler.startConnection(bluetoothDevice)
-				}
-				.setTitle(getString(R.string.select_bluetooth_device))
-				.create()
-				.show()
+	override fun onBackPressed() {
+		super.onBackPressed()
+		arduinoLed.disconnect()
 	}
 
 	private fun processCalibrateActionClick() {
@@ -88,7 +61,7 @@ class MainModeSelectorActivity : AppCompatActivity() {
 				.setTitle("Calibrate")
 				.setMessage("Do you want to perform calibration?")
 				.setPositiveButton("OK") { _, _ ->
-					BluetoothHandler.sendCommand(Command.Common.NOISE_CALIBRATION)
+					arduinoLed.sendCommand(Command.Common.NOISE_CALIBRATION)
 				}
 				.setNegativeButton("No") { _, _ -> }
 				.show()
@@ -97,19 +70,19 @@ class MainModeSelectorActivity : AppCompatActivity() {
 	private fun processBrightnessActionClick() {
 		val generalMode = ModeService.getModeWithCommonSettings()
 		val command = generalMode.command!!
-		BluetoothHandler.sendCommand(command)
+		arduinoLed.sendCommand(command)
 		AlertDialog.Builder(this)
 				.setTitle("Brightness")
 				.setView(SettingsLayoutProvider
 						.createModeSettingsLayout(this, generalMode))
 				.setPositiveButton("OK") { _, _ ->
-					BluetoothHandler.sendCommand(command)
+					arduinoLed.sendCommand(command)
 				}
-				.setOnCancelListener { BluetoothHandler.sendCommand(command) }
+				.setOnCancelListener { arduinoLed.sendCommand(command) }
 				.show()
 	}
 
 	private fun processPowerActionClick() {
-		BluetoothHandler.sendCommand(Command.Common.POWER)
+		arduinoLed.sendCommand(Command.Common.POWER)
 	}
 }
