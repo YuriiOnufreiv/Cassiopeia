@@ -1,4 +1,4 @@
-package onufreiv.cassiopeia
+package onufreiv.cassiopeia.prefs
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
