@@ -3,7 +3,6 @@ package onufreiv.cassiopeia.activity
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toolbar
 import onufreiv.cassiopeia.activity.helper.SettingsLayoutProvider.showModeSettings
 import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.activity.helper.SubModeLayoutProvider.showPrimarySubModes
@@ -23,7 +22,7 @@ class ModeControlActivity : AppCompatActivity() {
 		val mode = getSelectedMode()
 		val modeControlLayout = findViewById<ConstraintLayout>(R.id.mode_control_layout)
 
-//		showModeNameOnToolbar(mode)
+		showModeNameOnToolbar(mode)
 		showModeSettings(this, modeControlLayout, mode)
 		showPrimarySubModes(this, modeControlLayout, mode)
 	}
@@ -34,6 +33,6 @@ class ModeControlActivity : AppCompatActivity() {
 	}
 
 	private fun showModeNameOnToolbar(mode: Mode) {
-		findViewById<Toolbar>(R.id.toolbar).title = mode.name
+		supportActionBar!!.title = mode.name
 	}
 }
