@@ -11,7 +11,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main_mode_selector.*
 import onufreiv.cassiopeia.*
 import onufreiv.cassiopeia.activity.helper.SettingsLayoutProvider
 import onufreiv.cassiopeia.adapter.BluetoothDeviceAdapter
@@ -20,11 +20,11 @@ import onufreiv.cassiopeia.arduino.BluetoothHandler
 import onufreiv.cassiopeia.arduino.Command
 import onufreiv.cassiopeia.mode.ModeService
 
-class MainActivity : AppCompatActivity() {
+class MainModeSelectorActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_main)
+		setContentView(R.layout.activity_main_mode_selector)
 		setSupportActionBar(toolbar)
 
 		enableBluetooth()
