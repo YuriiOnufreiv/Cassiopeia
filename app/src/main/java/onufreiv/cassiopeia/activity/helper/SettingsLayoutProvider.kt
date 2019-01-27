@@ -11,6 +11,7 @@ import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.mode.Mode
 import onufreiv.cassiopeia.mode.Settings
 import onufreiv.cassiopeia.arduinoLed
+import onufreiv.cassiopeia.prefs
 
 object SettingsLayoutProvider {
 
@@ -22,7 +23,8 @@ object SettingsLayoutProvider {
 				.getViewById(R.id.mode_settings) as LinearLayout
 		settingsLayout.removeAllViews()
 
-		settingsLayout.addView(createModeSettingsLayout(context, mode))
+		val activeSubMode = getActiveSubMode(mode)
+		settingsLayout.addView(createModeSettingsLayout(context, activeSubMode))
 	}
 
 	fun createModeSettingsLayout(context: Context, mode: Mode): LinearLayout {
@@ -55,11 +57,22 @@ object SettingsLayoutProvider {
 
 		modeSettingsLayout.settings_name.text = settings.name
 		modeSettingsLayout.settings_decrease_button.setOnClickListener {
-			arduinoLed.sendCommand(settings.decreaseCommand)
+			arduinoLed.sendSettingsCommand(settings.decreaseCommand)
 		}
 		modeSettingsLayout.settings_increase_button.setOnClickListener {
-			arduinoLed.sendCommand(settings.increaseCommand)
+			arduinoLed.sendSettingsCommand(settings.increaseCommand)
 		}
 		return modeSettingsLayout
+	}
+
+	private fun getActiveSubMode(mode: Mode): Mode {
+		return mode.subModes.orEmpty()
+				.asSequence()
+				.filter { subMode ->
+					subMode.name == prefs.getActiveSubMode(mode)
+							&& subMode.settings.orEmpty().isNotEmpty()
+				}
+				.toList()
+				.firstOrNull() ?: mode
 	}
 }
