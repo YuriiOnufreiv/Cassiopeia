@@ -1,20 +1,21 @@
-package onufreiv.cassiopeia.prefs
+package onufreiv.cassiopeia
 
 import android.app.Application
-import onufreiv.cassiopeia.arduino.ArduinoLedBluetoothHandler
+import onufreiv.cassiopeia.arduino.ArduinoLed
+import onufreiv.cassiopeia.prefs.Preferences
 
 val prefs: Preferences by lazy {
 	Cassiopeia.prefs!!
 }
 
-val arduinoLed: ArduinoLedBluetoothHandler by lazy {
-	Cassiopeia.arduinoLedBluetoothHandler!!
+val arduinoLed: ArduinoLed by lazy {
+	Cassiopeia.arduinoLed
 }
 
 class Cassiopeia : Application() {
 	companion object {
 		var prefs: Preferences? = null
-		var arduinoLedBluetoothHandler = ArduinoLedBluetoothHandler()
+		var arduinoLed = ArduinoLed()
 	}
 
 	override fun onCreate() {

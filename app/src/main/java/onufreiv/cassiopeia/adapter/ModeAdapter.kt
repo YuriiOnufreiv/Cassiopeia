@@ -2,6 +2,7 @@ package onufreiv.cassiopeia.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +10,9 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.mode_item_row.view.*
 import onufreiv.cassiopeia.R
 import onufreiv.cassiopeia.activity.ModeControlActivity
+import onufreiv.cassiopeia.arduinoLed
 import onufreiv.cassiopeia.mode.Mode
-import onufreiv.cassiopeia.prefs.arduinoLed
+import onufreiv.cassiopeia.prefs
 
 class ModeAdapter(private val context: Context,
                   private val items: List<Mode>)
@@ -28,16 +30,25 @@ class ModeAdapter(private val context: Context,
 	override fun onBindViewHolder(holder: ModeViewHolder, position: Int) {
 		val mode = items[position]
 
+		highlightActiveMode(mode, holder)
+
 		holder.modeNameTextView.text = mode.name
 		holder.modeIconImageView.setImageResource(mode.icon!!)
 		holder.cardView.setOnClickListener {
-			turnOnMode(mode)
 			startModeControlActivity(mode)
+			arduinoLed.turnOnMode(mode)
+			notifyDataSetChanged()
 		}
 	}
 
-	private fun turnOnMode(mode: Mode) {
-		arduinoLed.sendCommand(mode.command!!)
+	private fun highlightActiveMode(mode: Mode, holder: ModeViewHolder) {
+		if (prefs.activeMode == mode.name) {
+			holder.modeIconImageView.setBackgroundColor(Color.parseColor("#f8fde3"))
+			holder.modeNameTextView.setBackgroundColor(Color.parseColor("#FFE9FBBB"))
+		} else {
+			holder.modeIconImageView.setBackgroundColor(Color.parseColor("#E3F2FD"))
+			holder.modeNameTextView.setBackgroundColor(Color.parseColor("#BBDEFB"))
+		}
 	}
 
 	private fun startModeControlActivity(mode: Mode) {

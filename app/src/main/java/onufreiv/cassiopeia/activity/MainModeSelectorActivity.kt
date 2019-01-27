@@ -13,7 +13,7 @@ import onufreiv.cassiopeia.activity.helper.SettingsLayoutProvider
 import onufreiv.cassiopeia.adapter.ModeAdapter
 import onufreiv.cassiopeia.arduino.Command
 import onufreiv.cassiopeia.mode.ModeService
-import onufreiv.cassiopeia.prefs.arduinoLed
+import onufreiv.cassiopeia.arduinoLed
 
 class MainModeSelectorActivity : AppCompatActivity() {
 
